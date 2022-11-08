@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import './App.css';
 import DiaryEditor from './DiaryEditor';
 import DiaryList from './DiaryList';
@@ -8,7 +8,7 @@ function App() {
 
 	const dataId = useRef(0);
 
-	const onCreate = (author, content, emotion) => {
+	const onCreate = useCallback((author, content, emotion) => {
 		const created_date = new Date().getTime();
 		const newItem = {
 			author,
@@ -19,8 +19,8 @@ function App() {
 		};
 
 		dataId.current += 1;
-		setData([newItem, ...data]);
-	};
+		setData(data => [newItem, ...data]);
+	}, []);
 
 	const onRemove = targetId => {
 		const newDiaryList = data.filter(element => element.id !== targetId);
