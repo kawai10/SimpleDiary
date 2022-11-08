@@ -22,18 +22,17 @@ function App() {
 		setData(data => [newItem, ...data]);
 	}, []);
 
-	const onRemove = targetId => {
-		const newDiaryList = data.filter(element => element.id !== targetId);
-		setData(newDiaryList);
-	};
+	const onRemove = useCallback(targetId => {
+		setData(data => data.filter(element => element.id !== targetId));
+	}, []);
 
-	const onEdit = (targetId, newContent) => {
-		setData(
+	const onEdit = useCallback((targetId, newContent) => {
+		setData(data =>
 			data.map(element =>
 				element.id === targetId ? { ...element, content: newContent } : element,
 			),
 		);
-	};
+	}, []);
 
 	const getDiaryAnalysis = useMemo(() => {
 		const goodCount = data.filter(element => element.emotion >= 3).length;
