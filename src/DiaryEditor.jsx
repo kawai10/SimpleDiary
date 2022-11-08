@@ -1,16 +1,16 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState } from 'react';
 
 const DiaryEditor = ({ onCreate }) => {
 	const authorInput = useRef();
 	const contentInput = useRef();
 
 	const [state, setState] = useState({
-		author: "",
-		content: "",
+		author: '',
+		content: '',
 		emotion: 1,
 	});
 
-	const handleChangeState = (e) => {
+	const handleChangeState = e => {
 		setState({
 			...state,
 			[e.target.name]: e.target.value,
@@ -29,21 +29,21 @@ const DiaryEditor = ({ onCreate }) => {
 		}
 
 		onCreate(state.author, state.content, state.emotion);
-		alert("저장성공");
+		alert('저장성공');
 		setState({
-			author: "",
-			content: "",
+			author: '',
+			content: '',
 			emotion: 1,
 		});
 	};
 
 	return (
-		<div className="DiaryEditor">
+		<div className='DiaryEditor'>
 			<h2>오늘의 일기</h2>
 			<div>
 				<input
 					ref={authorInput}
-					name="author"
+					name='author'
 					value={state.author}
 					onChange={handleChangeState}
 				/>
@@ -51,17 +51,16 @@ const DiaryEditor = ({ onCreate }) => {
 			<div>
 				<textarea
 					ref={contentInput}
-					name="content"
+					name='content'
 					value={state.content}
 					onChange={handleChangeState}
 				/>
 			</div>
 			<div>
 				<select
-					name="emotion"
+					name='emotion'
 					value={state.emotion}
-					onChange={handleChangeState}
-				>
+					onChange={handleChangeState}>
 					<option value={1}>1</option>
 					<option value={2}>2</option>
 					<option value={3}>3</option>
